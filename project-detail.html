@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Detail | Studio Quaint</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        #pano-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            opacity: 0;
+            visibility: hidden;
+            background: #000;
+            transition: opacity 0.8s ease;
+        }
+
+        #pano-container.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .hero-project {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .hero-project::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .project-content {
+            position: relative;
+            z-index: 5;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .btn-360 {
+            margin-top: 2rem;
+            cursor: pointer;
+            border: 1px solid white;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-360:hover {
+            background: white;
+            color: black;
+        }
+
+        #close-pano {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 100;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="main-header">
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo-link">
+                    <img src="assets/svg/StudioQuaint/OnlyLogo_white.svg" alt="Studio Quaint" class="logo">
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="project-main">
+        <section id="hero-section" class="hero-project">
+            <div class="project-content">
+                <p id="proj-meta" style="font-size: 0.9rem; letter-spacing: 3px; margin-bottom: 1rem;"></p>
+                <h1 id="proj-title" style="font-family: 'Playfair Display'; font-size: 4rem; margin-bottom: 1.5rem;">
+                    Loading...</h1>
+                <p id="proj-desc"
+                    style="font-size: 1.1rem; line-height: 1.6; max-width: 600px; margin: 0 auto; opacity: 0.8;"></p>
+
+                <div id="cta-container">
+                    <button id="start-360" class="btn-360" style="display: none;">Enter 360 Experience</button>
+                    <p id="status-360" style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.6; display: none;">
+                        Preparing 360 viewer...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="padding: 4rem 0 2rem 0; background: #fafafa;">
+        <div class="container">
+            <div
+                style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 2rem; text-align: center; color: var(--text-light); font-size: 0.8rem;">
+                <p style="margin-bottom: 0.5rem; color: var(--accent-color); font-weight: 500;">SITE UNDER CONSTRUCTION
+                    — CONTENT FOR DEMONSTRATION PURPOSES</p>
+                &copy; 2026 Studio Quaint. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <div id="pano-container"></div>
+    <div id="close-pano">&times;</div>
+
+    <!-- Vendor Scripts -->
+    <script src="js/vendor/bowser.min.js"></script>
+    <script src="js/vendor/screenfull.min.js"></script>
+    <script src="js/vendor/marzipano.js"></script>
+
+    <!-- App Logic -->
+    <script src="js/PanoManager.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const projectId = urlParams.get('id');
+            const pano = new PanoManager('pano-container');
+            let panoInitialized = false;
+
+            if (!projectId) {
+                window.location.href = 'projects.html';
+                return;
+            }
+
+            try {
+                // 1. Fetch registry data
+                const registryResp = await fetch('assets/projects/registry.json');
+                const registry = await registryResp.json();
+                const project = registry.find(p => p.id === projectId);
+
+                if (!project) throw new Error("Project not found");
+
+                // 2. Populate UI
+                document.getElementById('proj-title').textContent = project.title;
+                document.getElementById('proj-desc').textContent = project.description;
+                document.getElementById('proj-meta').textContent = `${project.location} · ${project.year}`;
+                document.getElementById('hero-section').style.backgroundImage = `url('assets/projects/${projectId}/${project.thumbnail}')`;
+
+                // 3. Early initialization of 360 viewer (Pre-warm)
+                if (project.has360) {
+                    const statusEl = document.getElementById('status-360');
+                    const btnEl = document.getElementById('start-360');
+
+                    statusEl.style.display = 'block';
+
+                    // Fire-and-forget init
+                    pano.init(projectId).then(success => {
+                        statusEl.style.display = 'none';
+                        if (success) {
+                            panoInitialized = true;
+                            btnEl.style.display = 'inline-block';
+                        } else {
+                            console.error("360 failed to initialize. Check console for PanoManager errors.");
+                        }
+                    }).catch(err => {
+                        console.error("Critical error during 360 init:", err);
+                        statusEl.style.display = 'none';
+                    });
+
+                    // Handle button click (Direct User Gesture)
+                    btnEl.addEventListener('click', () => {
+                        if (!panoInitialized) return;
+
+                        // Immediate Fullscreen (Chrome requires this at top of click)
+                        if (window.screenfull && screenfull.enabled) {
+                            screenfull.request().catch(e => console.warn("Fullscreen request blocked:", e));
+                        }
+
+                        // Show viewer
+                        document.getElementById('pano-container').classList.add('active');
+                        document.getElementById('close-pano').style.display = 'flex';
+                        document.getElementById('main-header').style.display = 'none';
+                    });
+                }
+
+            } catch (err) {
+                console.error("Initialization Failed:", err);
+                document.getElementById('proj-title').textContent = "Project Not Found";
+            }
+
+            // Close logic
+            document.getElementById('close-pano').addEventListener('click', () => {
+                document.getElementById('pano-container').classList.remove('active');
+                document.getElementById('close-pano').style.display = 'none';
+                document.getElementById('main-header').style.display = 'block';
+                if (window.screenfull && screenfull.isFullscreen) {
+                    screenfull.exit();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

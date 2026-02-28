@@ -1,0 +1,38 @@
+[
+  {
+    "id": "amber-courtyard",
+    "title": "Amber Courtyard",
+    "description": "A boutique hotel centered around a traditional Rajasthani courtyard.",
+    "year": "2023",
+    "location": "Jaipur, India",
+    "has360": false,
+    "thumbnail": "https://images.unsplash.com/photo-1600607687644-c7171b42498f?q=80&w=1000"
+  },
+  {
+    "id": "clay-villa",
+    "title": "Clay Villa",
+    "description": "Sustainable housing using compressed stabilized earth blocks.",
+    "year": "2025",
+    "location": "Agra, India",
+    "has360": false,
+    "thumbnail": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1000"
+  },
+  {
+    "id": "stone-house",
+    "title": "Stone House",
+    "description": "",
+    "year": "",
+    "location": "Agra, India",
+    "has360": true,
+    "thumbnail": "panorama.jpg"
+  },
+  {
+    "id": "veranda-loft",
+    "title": "Veranda Loft",
+    "description": "Renovation of an industrial loft focusing on open verandas and light.",
+    "year": "2023",
+    "location": "New Delhi, India",
+    "has360": false,
+    "thumbnail": "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?q=80&w=1000"
+  }
+]

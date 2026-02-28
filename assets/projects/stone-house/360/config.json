@@ -1,0 +1,38 @@
+{
+  "scenes": [
+    {
+      "id": "0-360-4kz",
+      "name": "360 4kz",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        }
+      ],
+      "faceSize": 1024,
+      "initialViewParameters": {
+        "yaw": -2.28,
+        "pitch": -0.06,
+        "fov": 1.57
+      },
+      "linkHotspots": [],
+      "infoHotspots": []
+    }
+  ],
+  "name": "Stone House",
+  "settings": {
+    "mouseViewMode": "drag",
+    "autorotateEnabled": true,
+    "fullscreenButton": false,
+    "viewControlButtons": false
+  }
+}

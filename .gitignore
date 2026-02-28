@@ -1,0 +1,14 @@
+# Local Testing
+.DS_Store
+*.log
+.docker/
+docker-compose.override.yml
+
+# IDE
+.vscode/
+.idea/
+
+# Backend/Scripting
+__pycache__/
+*.py[cod]
+*$py.class

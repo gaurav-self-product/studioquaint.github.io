@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team | Studio Quaint</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo-link">
+                    <img src="assets/svg/StudioQuaint/OnlyLogo_white.svg" alt="Studio Quaint" class="logo">
+                </a>
+                <div class="hamburger">☰</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="team.html" class="active">Team</a></li>
+                    <li><a href="#contact" class="btn-outline"
+                            style="padding: 0.5rem 1rem; font-size: 0.8rem;">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main style="padding-top: 100px;">
+        <section class="container mb-lg">
+            <h1 class="fade-in">The Studio</h1>
+            <p class="fade-in" style="max-width: 600px; color: var(--text-light); margin-bottom: 4rem;">
+                We are a collective of architects, designers, and artisans passionate about materials and memories.
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 4rem 2rem;">
+
+                <!-- 
+                    TEAM MEMBER CARD 
+                    To add/edit a member: 
+                    1. Change the image URL (src) to a real photo path
+                    2. Update the Name, Role, and Bio text
+                -->
+                <div class="team-card fade-in">
+                    <div
+                        style="margin-bottom: 1.5rem; overflow: hidden; border-radius: 50%; width: 200px; height: 200px; background: #eee;">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop"
+                            alt="Ar. Rahul Sharma"
+                            style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;"
+                            onmouseover="this.style.filter='grayscale(0%)'"
+                            onmouseout="this.style.filter='grayscale(100%)'">
+                    </div>
+                    <h3>Ar. Rahul Sharma</h3> <!-- [EDIT NAME] -->
+                    <p style="color: var(--accent-color); font-size: 0.9rem; text-transform: uppercase;">Principal
+                        Architect</p> <!-- [EDIT ROLE] -->
+                    <p style="color: var(--text-light); margin-top: 1rem; font-size: 0.95rem;">
+                        With over 15 years of experience, Rahul leads the studio with a vision rooted in critical
+                        regionalism. <!-- [EDIT BIO] -->
+                    </p>
+                </div>
+
+                <!-- TEAM MEMBER CARD -->
+                <div class="team-card fade-in" style="transition-delay: 0.1s;">
+                    <div
+                        style="margin-bottom: 1.5rem; overflow: hidden; border-radius: 50%; width: 200px; height: 200px; background: #eee;">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000&auto=format&fit=crop"
+                            alt="Priya Singh"
+                            style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;"
+                            onmouseover="this.style.filter='grayscale(0%)'"
+                            onmouseout="this.style.filter='grayscale(100%)'">
+                    </div>
+                    <h3>Priya Singh</h3> <!-- [EDIT NAME] -->
+                    <p style="color: var(--accent-color); font-size: 0.9rem; text-transform: uppercase;">Interior
+                        Designer</p> <!-- [EDIT ROLE] -->
+                    <p style="color: var(--text-light); margin-top: 1rem; font-size: 0.95rem;">
+                        Priya specializes in material selection and crafting bespoke interiors that tell a story.
+                        <!-- [EDIT BIO] -->
+                    </p>
+                </div>
+
+                <!-- TEAM MEMBER CARD -->
+                <div class="team-card fade-in" style="transition-delay: 0.2s;">
+                    <div
+                        style="margin-bottom: 1.5rem; overflow: hidden; border-radius: 50%; width: 200px; height: 200px; background: #eee;">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1000&auto=format&fit=crop"
+                            alt="Amit Verma"
+                            style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;"
+                            onmouseover="this.style.filter='grayscale(0%)'"
+                            onmouseout="this.style.filter='grayscale(100%)'">
+                    </div>
+                    <h3>Amit Verma</h3> <!-- [EDIT NAME] -->
+                    <p style="color: var(--accent-color); font-size: 0.9rem; text-transform: uppercase;">Project Manager
+                    </p> <!-- [EDIT ROLE] -->
+                    <p style="color: var(--text-light); margin-top: 1rem; font-size: 0.95rem;">
+                        Ensuring every detail translates from drawing board to site execution precision.
+                        <!-- [EDIT BIO] -->
+                    </p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>Studio Quaint</h4>
+                    <p>Agra, India</p>
+                    <a href="mailto:hello@studioquaint.com">hello@studioquaint.com</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Menu</h4>
+                    <a href="index.html">Home</a>
+                    <a href="projects.html">Projects</a>
+                    <a href="team.html">Team</a>
+                </div>
+            </div>
+            <div
+                style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 2rem; text-align: center; color: var(--text-light); font-size: 0.8rem;">
+                <p style="margin-bottom: 0.5rem; color: var(--accent-color); font-weight: 500;">SITE UNDER CONSTRUCTION
+                    — CONTENT FOR DEMONSTRATION PURPOSES</p>
+                &copy; 2026 Studio Quaint. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>

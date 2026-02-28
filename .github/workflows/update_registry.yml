@@ -1,0 +1,24 @@
+name: Update Project Registry
+
+on:
+  push:
+    paths:
+      - 'assets/projects/**'
+  workflow_dispatch:
+
+jobs:
+  update-registry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run Registry Update Script
+        run: |
+          python3 .github/scripts/update_registry.py
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name 'Studio Quaint Bot'
+          git config --global user.email 'bot@studioquaint.com'
+          git add assets/projects/registry.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update project registry" && git push)
