@@ -6,7 +6,8 @@
     "year": "2023",
     "location": "Jaipur, India",
     "has360": false,
-    "thumbnail": "https://images.unsplash.com/photo-1600607687644-c7171b42498f?q=80&w=1000"
+    "thumbnail": "https://images.unsplash.com/photo-1600607687644-c7171b42498f?q=80&w=1000",
+    "images": []
   },
   {
     "id": "clay-villa",
@@ -15,7 +16,41 @@
     "year": "2025",
     "location": "Agra, India",
     "has360": false,
-    "thumbnail": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1000"
+    "thumbnail": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1000",
+    "images": []
+  },
+  {
+    "id": "ginza",
+    "title": "Ginza Agra",
+    "description": "A Pan-Asian dining space shaped through softness, texture and flow. Inspired by organic forms and earthly minimalisim, the design moves away from rigid lines and embraces a fluid curves and sculpted surfaces that create a sense of warmth and quite escape.",
+    "year": "2026",
+    "location": "Agra, India",
+    "has360": false,
+    "thumbnail": "./Images/189A6374.jpg",
+    "images": [
+      "Images/189A6374.jpg",
+      "Images/189A6387.jpg",
+      "Images/189A6394.jpg",
+      "Images/189A6408.jpg",
+      "Images/189A6431.jpg",
+      "Images/189A6441.jpg",
+      "Images/189A6451.jpg",
+      "Images/189A6464.jpg",
+      "Images/189A6472.jpg",
+      "Images/189A6478.jpg",
+      "Images/189A6498.jpg",
+      "Images/189A6512.jpg",
+      "Images/189A6530.jpg",
+      "Images/189A6538.jpg",
+      "Images/189A6553.jpg",
+      "Images/189A6577.jpg",
+      "Images/189A6584.jpg",
+      "Images/189A6597.jpg",
+      "Images/189A6604.jpg",
+      "Images/189A6612.jpg",
+      "Images/189A6619.jpg",
+      "Images/189A6636.jpg"
+    ]
   },
   {
     "id": "stone-house",
@@ -24,7 +59,8 @@
     "year": "",
     "location": "Agra, India",
     "has360": true,
-    "thumbnail": "panorama.jpg"
+    "thumbnail": "panorama.jpg",
+    "images": []
   },
   {
     "id": "veranda-loft",
@@ -33,6 +69,7 @@
     "year": "2023",
     "location": "New Delhi, India",
     "has360": false,
-    "thumbnail": "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?q=80&w=1000"
+    "thumbnail": "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?q=80&w=1000",
+    "images": []
   }
 ]

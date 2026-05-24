@@ -9,8 +9,9 @@ Adding a project is fully automated. Simply follow these steps:
 
 1. Create a new folder in: assets/projects/ (e.g., assets/projects/my-new-house/)
 2. Add the following files into that folder:
-   - panorama.jpg: A horizontal wide image for the main gallery.
    - info.json: A simple file with project details.
+   - (Optional) panorama.jpg: A horizontal wide image for the main gallery.
+   - (Optional) Images/: A folder containing project photos. If present, the website will automatically generate a beautiful grid photo gallery with an immersive fullscreen lightbox.
    - (Optional) 360: A folder containing 360-degree assets.
 
 Example info.json:
@@ -49,7 +50,14 @@ For the MVP phase, team members are managed manually in 'team.html'.
 
 4. UPDATING THE WEBSITE
 -----------------------
-Every time you add a project or change a file, simply 'Commit' and 'Push' your changes to the Github repository. The website will automatically update its project registry and refresh itself online.
+Every time you add or update a project folder:
+
+1. Run the local registry update script in your terminal:
+   python3 .github/scripts/update_registry.py
+   
+   This script automatically scans all project subfolders, compiles their metadata, and catalogs any gallery images inside 'Images/' folders.
+   
+2. Commit and Push your changes to the Github repository.
 
 ---
 Studio Quaint Web Team
