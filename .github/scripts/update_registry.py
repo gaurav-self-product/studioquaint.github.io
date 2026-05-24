@@ -40,6 +40,15 @@ def update_registry():
                 except:
                     pass
             
+            # Check for extra gallery images in Images/ subfolder
+            images_dir = os.path.join(path, 'Images')
+            if os.path.exists(images_dir) and os.path.isdir(images_dir):
+                valid_extensions = ('.jpg', '.jpeg', '.png', '.webp')
+                images = [f for f in sorted(os.listdir(images_dir)) if f.lower().endswith(valid_extensions)]
+                project_data['images'] = [os.path.join('Images', img) for img in images]
+            else:
+                project_data['images'] = []
+            
             registry.append(project_data)
             
     with open(registry_path, 'w') as f:

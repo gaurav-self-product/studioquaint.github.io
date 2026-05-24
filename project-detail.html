@@ -92,6 +92,180 @@
             align-items: center;
             justify-content: center;
         }
+
+        /* Photo Gallery Styles */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-auto-rows: 250px;
+            grid-auto-flow: dense;
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            filter: grayscale(10%) brightness(95%);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0%) brightness(100%);
+        }
+
+        .gallery-item.wide {
+            grid-column: span 2;
+        }
+
+        .gallery-item.tall {
+            grid-row: span 2;
+        }
+
+        .gallery-item.big {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        /* Lightbox styling */
+        #lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(18, 18, 18, 0.98);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        #lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 85vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: scale(0.95);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        #lightbox.active .lightbox-img {
+            transform: scale(1);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1.5rem;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-nav:hover {
+            background: white;
+            color: black;
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .lightbox-prev {
+            left: -80px;
+        }
+
+        .lightbox-next {
+            right: -80px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -60px;
+            right: 0;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            color: white;
+        }
+
+        .lightbox-counter {
+            color: rgba(255, 255, 255, 0.5);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 900px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                grid-auto-rows: 200px;
+                gap: 1rem;
+            }
+            .gallery-item.wide, .gallery-item.big {
+                grid-column: span 1;
+            }
+            .gallery-item.tall, .gallery-item.big {
+                grid-row: span 1;
+            }
+            .lightbox-prev {
+                left: 10px;
+            }
+            .lightbox-next {
+                right: 10px;
+            }
+            .lightbox-nav {
+                background: rgba(0, 0, 0, 0.6);
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+            .lightbox-close {
+                top: -50px;
+                right: 10px;
+            }
+        }
     </style>
 </head>
 
@@ -127,6 +301,12 @@
                 </div>
             </div>
         </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery-section" class="container mt-lg mb-lg" style="display: none; padding-top: 2rem;">
+            <h2 class="section-title text-center mb-lg" style="font-family: var(--font-heading); font-size: 2.5rem; letter-spacing: 1px; color: var(--text-color);">Project Gallery</h2>
+            <div id="gallery-grid" class="gallery-grid"></div>
+        </section>
     </main>
 
     <footer style="padding: 4rem 0 2rem 0; background: #fafafa;">
@@ -142,6 +322,17 @@
 
     <div id="pano-container"></div>
     <div id="close-pano">&times;</div>
+
+    <!-- Lightbox Markup -->
+    <div id="lightbox">
+        <div class="lightbox-content">
+            <span class="lightbox-close">&times;</span>
+            <img class="lightbox-img" src="" alt="Detail Gallery Image">
+            <span class="lightbox-nav lightbox-prev">&larr;</span>
+            <span class="lightbox-nav lightbox-next">&rarr;</span>
+            <span class="lightbox-counter">1 / 1</span>
+        </div>
+    </div>
 
     <!-- Vendor Scripts -->
     <script src="js/vendor/bowser.min.js"></script>
@@ -174,7 +365,10 @@
                 document.getElementById('proj-title').textContent = project.title;
                 document.getElementById('proj-desc').textContent = project.description;
                 document.getElementById('proj-meta').textContent = `${project.location} · ${project.year}`;
-                document.getElementById('hero-section').style.backgroundImage = `url('assets/projects/${projectId}/${project.thumbnail}')`;
+                
+                const isAbsoluteUrl = project.thumbnail.startsWith('http://') || project.thumbnail.startsWith('https://') || project.thumbnail.startsWith('//');
+                const bgUrl = isAbsoluteUrl ? project.thumbnail : `assets/projects/${projectId}/${project.thumbnail}`;
+                document.getElementById('hero-section').style.backgroundImage = `url('${bgUrl}')`;
 
                 // 3. Early initialization of 360 viewer (Pre-warm)
                 if (project.has360) {
@@ -212,6 +406,108 @@
                         document.getElementById('main-header').style.display = 'none';
                     });
                 }
+
+                // 4. Populate Gallery if images list is present
+                if (project.images && project.images.length > 0) {
+                    const gallerySec = document.getElementById('gallery-section');
+                    const galleryGrid = document.getElementById('gallery-grid');
+                    galleryGrid.innerHTML = '';
+                    
+                    project.images.forEach((imgRelPath, index) => {
+                        const item = document.createElement('div');
+                        item.className = 'gallery-item fade-in';
+                        
+                        // Assign shapes based on index patterns
+                        if (index % 7 === 1) {
+                            item.classList.add('tall');
+                        } else if (index % 7 === 3) {
+                            item.classList.add('wide');
+                        } else if (index % 7 === 5) {
+                            item.classList.add('big');
+                        }
+                        
+                        const imgUrl = `assets/projects/${projectId}/${imgRelPath}`;
+                        item.innerHTML = `<img src="${imgUrl}" alt="${project.title} Detail Image ${index + 1}">`;
+                        
+                        item.addEventListener('click', () => openLightbox(index));
+                        galleryGrid.appendChild(item);
+                    });
+                    
+                    gallerySec.style.display = 'block';
+                    
+                    // Observe new fade-in elements
+                    if (window.IntersectionObserver) {
+                        const observer = new IntersectionObserver((entries) => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting) {
+                                    entry.target.classList.add('visible');
+                                }
+                            });
+                        }, { threshold: 0.05 });
+                        galleryGrid.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+                    }
+                }
+
+                // Lightbox functions and event handlers
+                const lightbox = document.getElementById('lightbox');
+                const lightboxImg = lightbox.querySelector('.lightbox-img');
+                const lightboxClose = lightbox.querySelector('.lightbox-close');
+                const lightboxPrev = lightbox.querySelector('.lightbox-prev');
+                const lightboxNext = lightbox.querySelector('.lightbox-next');
+                const lightboxCounter = lightbox.querySelector('.lightbox-counter');
+                
+                let currentImgIndex = 0;
+                
+                function openLightbox(index) {
+                    currentImgIndex = index;
+                    updateLightboxImage();
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+                
+                function closeLightbox() {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+                
+                function updateLightboxImage() {
+                    if (!project.images || project.images.length === 0) return;
+                    const imgRelPath = project.images[currentImgIndex];
+                    const imgUrl = `assets/projects/${projectId}/${imgRelPath}`;
+                    lightboxImg.src = imgUrl;
+                    lightboxCounter.textContent = `${currentImgIndex + 1} / ${project.images.length}`;
+                }
+                
+                function nextImage() {
+                    if (project.images && project.images.length > 0) {
+                        currentImgIndex = (currentImgIndex + 1) % project.images.length;
+                        updateLightboxImage();
+                    }
+                }
+                
+                function prevImage() {
+                    if (project.images && project.images.length > 0) {
+                        currentImgIndex = (currentImgIndex - 1 + project.images.length) % project.images.length;
+                        updateLightboxImage();
+                    }
+                }
+                
+                lightboxClose.addEventListener('click', closeLightbox);
+                lightboxNext.addEventListener('click', nextImage);
+                lightboxPrev.addEventListener('click', prevImage);
+                
+                lightbox.addEventListener('click', (e) => {
+                    if (e.target === lightbox || e.target.classList.contains('lightbox-content')) {
+                        closeLightbox();
+                    }
+                });
+                
+                document.addEventListener('keydown', (e) => {
+                    if (!lightbox.classList.contains('active')) return;
+                    if (e.key === 'Escape') closeLightbox();
+                    if (e.key === 'ArrowRight') nextImage();
+                    if (e.key === 'ArrowLeft') prevImage();
+                });
 
             } catch (err) {
                 console.error("Initialization Failed:", err);
